@@ -26,8 +26,11 @@ class EksiInformation:
             soup = self.get_url_response_text(url+"?p={}".format(page_no))
             for link in soup.find_all('div', {'class': 'info'}):
                 for entry_date in link.find_all('a', {'class': 'entry-date permalink'}):
-                    eksi_entry_time = time_parser(entry_date.get_text())
-                    datetime_to_str = eksi_entry_time.strftime(settings.DATE_FORMAT)
+                    try:
+                        eksi_entry_time = time_parser(entry_date.get_text())
+                        datetime_to_str = eksi_entry_time.strftime(settings.DATE_FORMAT)
+                    except:
+                        datetime_to_str = "01.01.1999 00:00"
                     for entry_author in link.find_all('a', {'class': 'entry-author'}):
                         entry_url = settings.EKSI_BASE_URL + entry_date['href']
                         entry_list.append({
