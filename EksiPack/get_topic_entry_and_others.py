@@ -37,7 +37,6 @@ class EksiInformation:
                             "author": entry_author.get_text(),
                             "publish_date": datetime_to_str,
                             "entry_url": entry_url,
-                            "source_name": "eksisozluk.com",
                             "text": extractor(entry_url)
                         })
                     else:
