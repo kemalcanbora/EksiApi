@@ -22,7 +22,7 @@ class EksiInformation:
             page_required = 2
 
         entry_list = []
-        for page_no in range(1, page_required ): # 1 den baslatma sebebim ?p=0 hata veriyor
+        for page_no in range(page_required,1, -1 ): # tersten başla 1 e kadar gel
             soup = self.get_url_response_text(url+"?p={}".format(page_no))
             for link in soup.find_all('div', {'class': 'info'}):
                 for entry_date in link.find_all('a', {'class': 'entry-date permalink'}):
