@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import ssl
 from EksiPack import settings
+import random,time
 
 ssl._create_default_https_context = ssl._create_unverified_context
 url_list = []
@@ -9,6 +10,7 @@ url_list = []
 def get_links_to_the_category(category_url):
     response = requests.get(category_url, headers=settings.HEADERS_GET)
     while response.status_code != settings.HTTP_OK:
+        time.sleep(random.randint(1,3))
         response = requests.get(category_url, headers=settings.HEADERS_GET)
     if response.status_code == settings.HTTP_OK:
         soup = BeautifulSoup(response.text, 'lxml')
