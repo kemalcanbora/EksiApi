@@ -1,4 +1,6 @@
-from EksiPack.eksi_api import EksiApi
+from EksiPack.v1.app import EksiApi
 
-info = EksiApi().get_url_informations(url="https://eksisozluk.com/ogrenildiginde-ufku-iki-katina-cikaran-seyler--2593151")
-print(info)
+eksi = EksiApi(proxy_val=True)
+populer_info = eksi.get_populer_topics()
+entry_info = eksi.get_entry_with_entry_id(entry_id="8780274")
+topic_info = eksi.get_topic_with_topic_id(topic_id="1036065")

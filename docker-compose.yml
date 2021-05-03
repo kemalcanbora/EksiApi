@@ -1,0 +1,29 @@
+version: '3'
+services:
+  tor-server:
+    build:
+      context: ./tor-server
+    image: tor-server
+    restart: on-failure
+    networks:
+      tor-net:
+        aliases:
+          - tor
+    ports:
+      - 9050:9050
+      - 9051:9051
+  privoxy-server:
+    build:
+      context: ./privoxy-server
+    image: privoxy-server
+    restart: on-failure
+    ports:
+      - 8118:8118
+    networks:
+      - tor-net
+    depends_on:
+      - tor-server
+
+networks:
+  tor-net:
+    driver: bridge
